@@ -22,7 +22,7 @@ function [y1, y2]=Crossover(x1,x2,params)
     y1=alpha.*x1+(1-alpha).*x2;
     y2=alpha.*x2+(1-alpha).*x1;
     
-    y1=min(max(y1,VarMin),VarMax);
-    y2=min(max(y2,VarMin),VarMax);
+    y1= mod(round(min(max(y1,VarMin),VarMax)),50)+1;
+    y2= mod(round(min(max(y2,VarMin),VarMax)),50)+1;
 
 end

@@ -23,6 +23,6 @@ function y=Mutate(x,params)
     
     % y=x+sigma*unifrnd(-1,1,size(x));
     
-    y=min(max(y,VarMin),VarMax);
-
+    y= mod(round(min(max(y,VarMin),VarMax)),50)+1;
+    
 end
