@@ -11,14 +11,17 @@
 % Contact Info: sm.kalami@gmail.com, info@yarpiz.com
 %
 
-function z=Lab_ZDT(x)
+function [y1, y2]=Crossover(x1,x2,params)
 
-    n=numel(x);
-    f1=x(1);    
-    g=1+9/(n-1)*sum(x(2:end));    
-    h=1-sqrt(f1/g);    
-    f2=g*h;    
-    z=[f1
-       f2];
-
+    gamma=params.gamma;
+    VarMin=params.VarMin;
+    VarMax=params.VarMax;
+    
+    alpha=unifrnd(-gamma,1+gamma,size(x1));
+    
+    y1=alpha.*x1+(1-alpha).*x2;
+    y2=alpha.*x2+(1-alpha).*x1;
+    
+    y1=floor(min(max(y1,VarMin),VarMax));
+    y2=floor(min(max(y2,VarMin),VarMax));    
 end

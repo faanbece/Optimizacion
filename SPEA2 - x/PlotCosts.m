@@ -11,14 +11,12 @@
 % Contact Info: sm.kalami@gmail.com, info@yarpiz.com
 %
 
-function z=Lab_ZDT(x)
+function PlotCosts(PF)
 
-    n=numel(x);
-    f1=x(1);    
-    g=1+9/(n-1)*sum(x(2:end));    
-    h=1-sqrt(f1/g);    
-    f2=g*h;    
-    z=[f1
-       f2];
-
+    PFC=[PF.Cost];
+    plot(PFC(1,:),PFC(2,:),'x');
+    xlabel('1^{st} Objectivo (Distancia) ');
+    ylabel('2^{nd} Objectivo (Tiempo) ');
+    grid on;
+    
 end

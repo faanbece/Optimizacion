@@ -19,8 +19,8 @@ function [y1, y2]=Crossover(x1,x2,params)
     
     alpha=unifrnd(-gamma,1+gamma,size(x1));
     
-    y1=alpha.*x1+(1-alpha).*x2;
-    y2=alpha.*x2+(1-alpha).*x1;
+    y1=floor(alpha.*x1+(1-alpha).*x2);
+    y2=floor(alpha.*x2+(1-alpha).*x1);
     
     y1= mod(round(min(max(y1,VarMin),VarMax)),50)+1;
     y2= mod(round(min(max(y2,VarMin),VarMax)),50)+1;

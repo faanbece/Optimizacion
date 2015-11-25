@@ -11,14 +11,18 @@
 % Contact Info: sm.kalami@gmail.com, info@yarpiz.com
 %
 
-function z=Lab_ZDT(x)
+function y=Mutate(x,params)
 
-    n=numel(x);
-    f1=x(1);    
-    g=1+9/(n-1)*sum(x(2:end));    
-    h=1-sqrt(f1/g);    
-    f2=g*h;    
-    z=[f1
-       f2];
+    h=params.h;
+    VarMin=params.VarMin;
+    VarMax=params.VarMax;
 
+    sigma=h*(VarMax-VarMin);
+    
+    y=x+sigma*randn(size(x));
+    
+    % y=x+sigma*unifrnd(-1,1,size(x));
+    
+    y=floor(min(max(y,VarMin),VarMax));
+    %%y=min(max(y,VarMin),VarMax);
 end

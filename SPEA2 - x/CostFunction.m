@@ -1,4 +1,4 @@
-function cost = Lab_costFunction( route,distances,times )
+function cost = CostFunction( route,distances,times )
 %LAB_COSTFUNCTION Summary of this function goes here
 %   Detailed explanation goes here
 
@@ -14,8 +14,8 @@ function cost = Lab_costFunction( route,distances,times )
         sumD=sumD+distances(a,b);
         sumT=sumT+times(a,b);
     end
-    a=mod(route(numel(route)),lim)+1;  
-    b=mod(route(1),lim)+1;
+     a=mod(route(numel(route)),lim)+1;  
+     b=mod(route(1),lim)+1;
      
     sumD=sumD+distances(a,b);
     sumT=sumT+times(a,b);

@@ -11,14 +11,16 @@
 % Contact Info: sm.kalami@gmail.com, info@yarpiz.com
 %
 
-function z=Lab_ZDT(x)
+function b=Dominates(x,y)
 
-    n=numel(x);
-    f1=x(1);    
-    g=1+9/(n-1)*sum(x(2:end));    
-    h=1-sqrt(f1/g);    
-    f2=g*h;    
-    z=[f1
-       f2];
+    if isstruct(x) && isfield(x,'Cost')
+        x=x.Cost;
+    end
 
+    if isstruct(y) && isfield(y,'Cost')
+        y=y.Cost;
+    end
+
+    b=all(x<=y) && any(x<y);
+    
 end
