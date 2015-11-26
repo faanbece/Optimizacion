@@ -1,6 +1,7 @@
 
 function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
-     %clear;
+    tic; 
+    %clear;
     %close all;
     %% Problem Definition
 
@@ -24,7 +25,7 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
     nArchive=50;        % Archive Size
     K=round(sqrt(nPop+nArchive));  % KNN Parameter
 
-    pCrossover=0.5;
+    pCrossover=0.7;
     nCrossover=round(pCrossover*nPop/2)*2;
 
     pMutation=1-pCrossover;
@@ -113,11 +114,11 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
                 SIGMA(:,j)=[];
             end
         end
-        PF=archive([archive.R]>=0); % Approximate Pareto Front
+        PF=archive([archive.R]==0); % Approximate Pareto Front
 
         % Plot Pareto Front
-       figure(1);
-       PlotCosts(PF);
+%        figure(1);
+%        PlotCosts(PF);
        %% pause(0.01);
 
         % Display Iteration Information
@@ -178,9 +179,13 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
         (max(PFC(1,:)))
         (std(PFC(1,:)))
         (mean(PFC(1,:)))
+        
         (min(PFC(2,:)))
         (max(PFC(2,:)))
         (std(PFC(2,:)))
         (mean(PFC(2,:)))
+        
+        (toc)
         ];
+    
 end
