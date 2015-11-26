@@ -1,15 +1,14 @@
 
 function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
-%     clear all;
-%     close all;
+     %clear;
+    %close all;
     %% Problem Definition
 
-    %%numNodes=50;
     fileName=strcat(int2str(numNodes),'x',int2str(numNodes),'distances','.csv'); 
-    disp(['Datos Distancias Obtenidos de: ', fileName]);
+   %% disp(['Datos Distancias Obtenidos de: ', fileName]);
     Mdistances = csvread(fileName);
     fileName=strcat(int2str(numNodes),'x',int2str(numNodes),'times','.csv'); 
-    disp(['Datos Distancias Obtenidos de: ', fileName]);
+    %%disp(['Datos Distancias Obtenidos de: ', fileName]);
     Mtimes = csvread(fileName);
 
     %%CostFunction=@(x) ZDT(x);
@@ -25,7 +24,7 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
     nArchive=50;        % Archive Size
     K=round(sqrt(nPop+nArchive));  % KNN Parameter
 
-    pCrossover=0.7;
+    pCrossover=0.5;
     nCrossover=round(pCrossover*nPop/2)*2;
 
     pMutation=1-pCrossover;
@@ -68,11 +67,9 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
            archive];
         nQ=numel(Q);
         dom=false(nQ,nQ);
-
         for i=1:nQ
             Q(i).S=0;
         end
-
         for i=1:nQ
             for j=i+1:nQ
                 if Dominates(Q(i),Q(j))
@@ -88,7 +85,6 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
         for i=1:nQ
             Q(i).R=sum(S(dom(:,i)));
         end
-
         Z=[Q.Cost]';
         SIGMA=pdist2(Z,Z,'seuclidean');
         SIGMA=sort(SIGMA);
@@ -98,37 +94,30 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
             Q(i).D=1/(Q(i).sigmaK+2);
             Q(i).F=Q(i).R+Q(i).D;
         end
-
         nND=sum([Q.R]==0);
         if nND<=nArchive
             F=[Q.F];
             [F, SO]=sort(F);
             Q=Q(SO);
             archive=Q(1:min(nArchive,nQ));
-
         else
             SIGMA=SIGMA(:,[Q.R]==0);
             archive=Q([Q.R]==0);
-
             k=2;
             while numel(archive)>nArchive
                 while min(SIGMA(k,:))==max(SIGMA(k,:)) && k<size(SIGMA,1)
                     k=k+1;
                 end
-
                 [~, j]=min(SIGMA(k,:));
-
                 archive(j)=[];
                 SIGMA(:,j)=[];
             end
-
         end
-
         PF=archive([archive.R]>=0); % Approximate Pareto Front
 
         % Plot Pareto Front
-        figure(1);
-        PlotCosts(PF);
+       figure(1);
+       PlotCosts(PF);
        %% pause(0.01);
 
         % Display Iteration Information
