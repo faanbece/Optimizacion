@@ -117,8 +117,8 @@ function resoults = spea2(numNodes,nPop,VarMin,VarMax, MaxIt  )
         PF=archive([archive.R]==0); % Approximate Pareto Front
 
         % Plot Pareto Front
-%        figure(1);
-%        PlotCosts(PF);
+        
+        PlotCosts(PF);
        %% pause(0.01);
 
         % Display Iteration Information

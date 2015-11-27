@@ -1,9 +1,8 @@
-probs=3;
-iter=30;
+probs=1;
+iter=1;
 %%minD=zeros(1,iter);
 %%maxD=zeros(1,iter);
 meaD=zeros(1,iter);
-ener
 %%minT=zeros(1,iter);
 %%maxT=zeros(1,iter);
 meaT=zeros(1,iter);
@@ -16,7 +15,7 @@ vecMeaT=zeros(probs,4);
 for i=1:probs
     for j=1:iter
         disp(['Iteration ',  num2str(j)]);
-        s=spea2(i*20,10,1,99,75);
+        s=spea2(i*20,30,1,99,75);
        % minD(j)=s(1);
        % maxD(j)=s(2);
         meaD(j)=s(4);
